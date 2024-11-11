@@ -12,13 +12,13 @@ void Task1();
 void Task1_1(int n);
 
 void Task2();
-void Task2_1(int* a, int n);
+void Task2_1(int a, int b);
 
 void Task3();
 void Task3_1(int secretNumber);
 
 void Task4();
-void Task4_1(int a, int b);
+int Task4_1(int a, int b);
 
 void Task5();
 float Task5_1(int n, float x, float eps);
@@ -31,6 +31,7 @@ void Task7();
 double Task7_1(int n, float x);
 
 void Task8();
+int Task8_1(int n);
 int Task8_2(int n);
 
 void Task9();
@@ -41,13 +42,13 @@ int M(int n);
 int main()
 {
 	setlocale(LC_ALL, "");
-	Task3();
+	Task5();
 }
 
 void Task1() {
 	int n;
 	cout << "Введите число n "; cin >> n;
-	Task1_1(int n);
+	Task1_1(n);
 }
 void Task1_1(int n){
     float P = 0;
@@ -58,20 +59,20 @@ void Task1_1(int n){
 }
 
 void Task2() {
-	int* a = new int[2];
-	int n;
+	int a,b;
 	do {
-		cout << "Введите первое число "; cin >> a[0];
-		cout << "Введите второе число отличное от первого "; cin >> a[1];
-		sort(a, a + 2);
-	} while (a[1] - a[0] == 0);
+		cout << "Введите первое число "; cin >> a;
+		cout << "Введите второе число отличное от первого "; cin >> a;
 
-	Task2_1(int* a, int n);
+	} while (max(a,b) - min(a,b) == 0);
+
+	Task2_1(a,b);
 }
-void Task2_1(int* a, int n){
+void Task2_1(int a, int b){
+    int n;
     do {
 		cout << "Введите  число "; cin >> n;
-	} while (n<a[0] || n>a[1]);
+	} while (n<min(a,b) || n>max(a,b));
 	cout << "Ура Вы угадали(надо было вписать число из диапазона)";
 }
 
@@ -101,16 +102,16 @@ void Task4() {
     cout << "Введите первое число "; cin >> a;
     cout << "Введите второе число "; cin >> b;
 
-	Task4_1(a,b);
+	cout<<Task4_1(a,b);
 }
-void Task4_1(int a, int b){
+int Task4_1(int a, int b){
     while (a != b) {
 		if (a > b)
 			a -= b;
 		else
 			b -= a;
 	}
-	cout << a;
+	return a;
 }
 
 void Task5() {
@@ -142,8 +143,9 @@ void Task6() {
 void Task6_1(float xn, float xk, float xd, float a, float b, float c) {
 	int a1 = int(a), b1 = int(b), c1 = int(c);
 	float x = xn;
+	int ee = (a1 | b1) & ((a1 | c1));
 	while (x <= xk) {
-		if ((a1 | b1) & (!(a1 | c1)) )
+		if (ee)
 			cout << setw(10)<<x << setw(10) << Task6_2(x, a, b, c) << endl;
 		else
 			cout << setw(10) << x << setw(10) << int(Task6_2(x, a, b, c)) << endl;
@@ -179,12 +181,21 @@ double Task7_1(int n, float x) {
 void Task8() {
 	int a;
 	cout << "Введите число "; cin >> a;
-	cout << Task8_2(a);
+	cout << Task8_1(a);
 }
-int Task8_2(int n) {
+int Task8_1(int n) {
 	if (n == 0)return 0;
 	else if (n == 1)return 1;
-	else return Task8_2(n - 1) + Task8_2(n - 2);
+	else return Task8_1(n - 1) + Task8_2(n - 2);
+}
+int Task8_2(int n) {
+	int* a = new int[n+1];
+	a[0] = 0;
+	a[1] = 1;
+	for(int i=2;i<=n;i++){
+        a[i] = a[i-1] + a[i-2];
+	}
+	return a[n];
 }
 
 void Task9() {
