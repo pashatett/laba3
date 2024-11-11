@@ -1,4 +1,4 @@
-﻿#include <algorithm>
+#include <algorithm>
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
@@ -9,9 +9,16 @@
 using namespace std;
 
 void Task1();
+void Task1_1(int n);
+
 void Task2();
+void Task2_1(int* a, int n);
+
 void Task3();
+void Task3_1(int secretNumber);
+
 void Task4();
+void Task4_1(int a, int b);
 
 void Task5();
 float Task5_1(int n, float x, float eps);
@@ -34,13 +41,16 @@ int M(int n);
 int main()
 {
 	setlocale(LC_ALL, "");
-	Task7();
+	Task3();
 }
 
 void Task1() {
 	int n;
 	cout << "Введите число n "; cin >> n;
-	float P = 0;
+	Task1_1(int n);
+}
+void Task1_1(int n){
+    float P = 0;
 	for (int i = 1; i <= n; i++) {
 		P += 1 / (i * (i + 1));
 	}
@@ -52,43 +62,49 @@ void Task2() {
 	int n;
 	do {
 		cout << "Введите первое число "; cin >> a[0];
-		cout << "Введите второе число "; cin >> a[1];
+		cout << "Введите второе число отличное от первого "; cin >> a[1];
 		sort(a, a + 2);
 	} while (a[1] - a[0] == 0);
 
-	do {
+	Task2_1(int* a, int n);
+}
+void Task2_1(int* a, int n){
+    do {
 		cout << "Введите  число "; cin >> n;
 	} while (n<a[0] || n>a[1]);
-	cout << "Ура Вы угадали";
+	cout << "Ура Вы угадали(надо было вписать число из диапазона)";
 }
 
 void Task3() {
 	srand(time(0));
 	int secretNumber = rand() % 100 + 1;
-	int userGuess = 0;
-	int count = 0;
-	while (userGuess != secretNumber) {
+
+	Task3_1(secretNumber);
+}
+void Task3_1(int secretNumber){
+    int userGuess = 0, countt = 0;
+    while (userGuess != secretNumber) {
 		cout << "Введите ваше число: "; cin >> userGuess;
-		count++;
-		if (userGuess > secretNumber) {
+		countt++;
+		if (userGuess > secretNumber)
 			cout << "Перелет! Попробуйте ввести число меньше." << endl;
-		}
-		else if (userGuess < secretNumber) {
+		else if (userGuess < secretNumber)
 			cout << "Недолет! Попробуйте ввести число больше." << endl;
-		}
 	}
-	cout << "Поздравляю! Вы угадали число " << secretNumber << " за " << count << " попыток!" << endl;
+	cout << "Поздравляю! Вы угадали число " << secretNumber << " за " << countt << " попыток!" << endl;
 }
 
 void Task4() {
 	int a, b;
-	cout << "Введите два положительных числа" << endl;
-	do {
-		cout << "Введите первое число "; cin >> a;
-		cout << "Введите второе число "; cin >> b;
-	} while (a < 0 || b < 0);
+	cout << "Введите два числа" << endl;
 
-	while (a != b) {
+    cout << "Введите первое число "; cin >> a;
+    cout << "Введите второе число "; cin >> b;
+
+	Task4_1(a,b);
+}
+void Task4_1(int a, int b){
+    while (a != b) {
 		if (a > b)
 			a -= b;
 		else
@@ -104,8 +120,7 @@ void Task5() {
 	cout << "Введите число eps "; cin >> eps;
 	cout << "Введите число "; cin >> n;
 	float x1 = Task5_1(n, x, eps);
-	float y = 1;
-	float a = 0;
+	float y = 1, a = 0;
 	while (abs(y - a) >= eps) {
 		a = y;
 		y = (a + x1 / a) / 2;
@@ -113,7 +128,7 @@ void Task5() {
 	cout << "y = " << y;
 }
 float Task5_1(int n, float x, float eps) {
-	if (n == 1)return 1;
+	if (n == 1) return 1;
 	else return 0.5 * (Task5_1(n - 1, x, eps) + x / Task5_1(n - 1, x, eps));
 }
 
@@ -128,7 +143,7 @@ void Task6_1(float xn, float xk, float xd, float a, float b, float c) {
 	int a1 = int(a), b1 = int(b), c1 = int(c);
 	float x = xn;
 	while (x <= xk) {
-		if ((a1 || b1) && (!(a1 || c1)) )
+		if ((a1 | b1) & (!(a1 | c1)) )
 			cout << setw(10)<<x << setw(10) << Task6_2(x, a, b, c) << endl;
 		else
 			cout << setw(10) << x << setw(10) << int(Task6_2(x, a, b, c)) << endl;
@@ -158,7 +173,7 @@ double Task7_1(int n, float x) {
 	for (int i = 0; i <= n; i++) {
 		y += pow(-1, n) * pow(x - 1, n + 1) / (n + 1);
 	}
-	return log(y);
+	return y;
 }
 
 void Task8() {
