@@ -42,6 +42,37 @@ int M(int n);
 int main()
 {
 	setlocale(LC_ALL, "");
+	int n;
+	cout<<"Какую задачу?";cin>>n;
+	switch (n) {
+case 1:
+	Task1();
+	break;
+case 2:
+	Task2();
+	break;
+case 3:
+	Task3();
+	break;
+case 4:
+	Task4();
+	break;
+case 5:
+	Task5();
+	break;
+case 6:
+	Task6();
+	break;
+case 7:
+	Task7();
+	break;
+case 8:
+	Task8();
+	break;
+case 9:
+	Task9();
+	break;
+}
 	Task5();
 }
 
@@ -51,9 +82,9 @@ void Task1() {
 	Task1_1(n);
 }
 void Task1_1(int n){
-    float P = 0;
+	double P = 0.0;
 	for (int i = 1; i <= n; i++) {
-		P += 1 / (i * (i + 1));
+		P += 1.0 / (i * (i + 1));
 	}
 	cout << "P = " << P;
 }
@@ -63,7 +94,6 @@ void Task2() {
 	do {
 		cout << "Введите первое число "; cin >> a;
 		cout << "Введите второе число отличное от первого "; cin >> a;
-
 	} while (max(a,b) - min(a,b) == 0);
 
 	Task2_1(a,b);
