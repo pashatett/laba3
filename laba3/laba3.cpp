@@ -241,3 +241,133 @@ int M(int n) {
 	if (n >= 100) return n - 10;
 	else return M(n + 11);
 }
+
+
+
+
+//--------------------------------------------------------------------
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+void MakeArrInt(int* mass, int n);
+double* MakeArrDouble();
+void ShowArrInt(int* mass,int n);
+void ShowArrDouble(double* mass,int n);
+void Task1();
+void Task2();
+void Task3();
+void Task4();
+double SumElEvDouble(double* mass, int n);
+int MultIntAfterMax(int* mass, int n);
+
+int main()
+{
+    srand(unsigned(time(0)));
+    cout << "*******************************" << endl;
+    cout<<setw(45)<<"Лабораторная работа №4"<<endl;
+    cout<<setw(40)<<"Одномерные массивы"<<endl;
+    cout<<"Выполнил студент группы 151412"<<endl;
+    cout<<setw(49)<<"Пирогов Павел Алексеевич"<<endl;
+    cout<<setw(30)<<"Вариант №17"<<endl;
+    cout << "*******************************" << endl<<endl;
+    int n;
+    cout<<"Какую задачу хотите запустить? ";cin>>n;
+    switch(n){
+    case 1:
+        Task1();
+        break;
+    case 2:
+        Task2();
+        break;
+    case 3:
+        Task3();
+        break;
+    case 4:
+        Task4();
+        break;
+    default:
+        cout<<"Такой задачи нет((";
+        break;
+    }
+}
+
+void Task1(){
+    int n;
+    do{
+        cout<<"Сколько чисел хотите в массиве? ";cin>>n;
+    }while(n<=0);
+    int* mass = new int[n];
+    MakeArrInt(mass,n);
+    ShowArrInt(mass,n);
+}
+
+void MakeArrInt(int* mass, int n){
+    for (int i = 0;i<n;i++){
+        mass[i] = rand()%200-100;
+    }
+}
+
+double* MakeArrDouble(){
+    int n;
+    do{
+        cout<<"Сколько чисел хотите в массиве? ";cin>>n;
+    }while(n<=0);
+    double* mass = new double[n+1];
+    mass[0] = n;
+    for (int i = 1;i<n+1;i++){
+        mass[i] = 0.01 * (rand()%200-100);
+    }
+    return mass;
+}
+
+void ShowArrInt(int* mass, int n){
+    for (int i = 0; i<n;i++){
+        cout<<mass[i]<<" ";
+    }
+    cout<<endl;
+}
+void ShowArrDouble(double* mass, int n){
+    for (int i = 1; i<n+1;i++){
+        cout<<mass[i]<<" ";
+    }
+    cout<<endl;
+}
+
+void Task2(){
+    double* mass = MakeArrDouble();
+    ShowArrDouble(mass,mass[0]);
+};
+
+void Task3(){
+    double* mass = MakeArrDouble();
+    ShowArrDouble(mass,mass[0]);
+    cout<<SumElEvDouble(mass,mass[0]);
+}
+
+double SumElEvDouble(double* mass, int n){
+    double summ = 0.0;
+    for (int i = 0;i<n+1;i++){
+        if (i%2!=0)summ += mass[i];
+    }
+    return summ;
+}
+
+void Task4(){
+    //int* mass = MakeArrInt();
+    //ShowArrInt(mass,mass[0]);
+    //cout<<MultIntAfterMax(mass,mass[0]);
+}
+
+int MultIntAfterMax(int* mass, int n){
+    int maxx = mass[1];
+    for(int i = 1;i<n+1;i++){
+        if (maxx < mass[i])maxx = i;
+    }
+    int mult = 1;
+    for(int i = maxx+1;i<=n+1;i++){
+        mult *= mass[i];
+    }
+    return mult;
+}
