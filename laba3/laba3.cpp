@@ -252,7 +252,7 @@ int M(int n) {
 using namespace std;
 
 void MakeArrInt(int* mass, int n);
-double* MakeArrDouble();
+void MakeArrDouble(double* mass, int n);
 void ShowArrInt(int* mass,int n);
 void ShowArrDouble(double* mass,int n);
 void Task1();
@@ -301,6 +301,7 @@ void Task1(){
     int* mass = new int[n];
     MakeArrInt(mass,n);
     ShowArrInt(mass,n);
+    delete[] mass;
 }
 
 void MakeArrInt(int* mass, int n){
@@ -309,17 +310,10 @@ void MakeArrInt(int* mass, int n){
     }
 }
 
-double* MakeArrDouble(){
-    int n;
-    do{
-        cout<<"Сколько чисел хотите в массиве? ";cin>>n;
-    }while(n<=0);
-    double* mass = new double[n+1];
-    mass[0] = n;
-    for (int i = 1;i<n+1;i++){
+void MakeArrDouble(double* mass, int n){
+    for (int i = 0;i<n;i++){
         mass[i] = 0.01 * (rand()%200-100);
     }
-    return mass;
 }
 
 void ShowArrInt(int* mass, int n){
@@ -329,19 +323,29 @@ void ShowArrInt(int* mass, int n){
     cout<<endl;
 }
 void ShowArrDouble(double* mass, int n){
-    for (int i = 1; i<n+1;i++){
+    for (int i = 0; i<n;i++){
         cout<<mass[i]<<" ";
     }
     cout<<endl;
 }
 
 void Task2(){
-    double* mass = MakeArrDouble();
-    ShowArrDouble(mass,mass[0]);
-};
+    int n;
+    do{
+        cout<<"Сколько чисел хотите в массиве? ";cin>>n;
+    }while(n<=0);
+    double* mass = new double[n];
+    MakeArrDouble(mass,n);
+    ShowArrDouble(mass,n);
+}
 
 void Task3(){
-    double* mass = MakeArrDouble();
+    int n;
+    do{
+        cout<<"Сколько чисел хотите в массиве? ";cin>>n;
+    }while(n<=0);
+    double* mass = new double[n];
+    MakeArrDouble(mass, n);
     ShowArrDouble(mass,mass[0]);
     cout<<SumElEvDouble(mass,mass[0]);
 }
