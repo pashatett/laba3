@@ -14,6 +14,56 @@ void Task3();
 
 int gcd(int m, int n);
 void Task4();
+void Task5() {
+ float x, eps;
+ cout << "введите x: ";
+ cin >> x; 
+ cout<< "введите eps: ";
+ cin >> eps;
+
+ cout << func_5(x, eps);
+}
+float func_5(float x, float eps) {
+ float y, n, y_pred;
+ y = 1;
+ 
+ y_pred = 0;
+ while (abs(y - y_pred) > eps) {
+  y_pred = y;
+  y = 0.5 * (y_pred + x / y_pred);
+  
+ }
+ return y;
+}
+
+void Task6() {
+ float xn, xk, dx;
+ cout << "Введите X начальное, Х конечное, шаг: "; 
+ cin >> xn >> xk >> dx;
+ float a, b, c;
+ cout << "Введите a, b, c: "; 
+ cin >> a >> b >> c;
+ func_6_1(xn, xk, dx, a, b, c);
+}
+void func_6_1(float xn, float xk, float dx, float a, float b, float c) {
+ int ai = int(a), bi = int(b), ci = int(c);
+ float x = xn;
+ while (x <= xk) {
+  if ((int (~(ai | bi) & (bi | ci))) != 0)
+   cout << setw(10) << x << setw(10) << func_6_2(x, a, b, c) << endl;
+  else
+   cout << setw(10) << x << setw(10) << int(func_6_2(x, a, b, c)) << endl;
+  x += dx;
+ }
+}
+float func_6_2(float x, float a, float b, float c) {
+ if (a < 0 && x != 0)
+  return a * x * x + b * b * x;
+ else if (a > 0 && x == 0)
+  return x - (a / (x - c));
+ else
+  return 1+x/c;
+}
 
 
 
